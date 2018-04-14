@@ -4,8 +4,8 @@ import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 
-public class Matchers {
-    public static Matcher<? super BoardPosition> position(String column, int row) {
+class Matchers {
+    static Matcher<? super BoardPosition> position(String column, int row) {
         return new TypeSafeMatcher<>() {
 
 
@@ -16,7 +16,7 @@ public class Matchers {
 
             @Override
             protected boolean matchesSafely(BoardPosition position) {
-                return position.row() == row && position.column().equals(column);
+                return position.isValid() && position.row() == row && position.column().equals(column);
             }
 
             @Override
@@ -26,7 +26,30 @@ public class Matchers {
         };
     }
 
-    public static Matcher<? super Path> path(Matcher<? super BoardPosition>... positions) {
+    static Matcher<? super BoardPosition> invalidPosition() {
+        return new TypeSafeMatcher<>() {
+
+
+            @Override
+            protected void describeMismatchSafely(BoardPosition item, Description mismatchDescription) {
+                mismatchDescription.appendText(" was ").appendValue(item);
+            }
+
+            @Override
+            protected boolean matchesSafely(BoardPosition position) {
+                return !position.isValid();
+            }
+
+            @Override
+            public void describeTo(Description description) {
+                description.appendText("position should be invalid position");
+            }
+        };
+    }
+
+
+    @SafeVarargs
+    static Matcher<? super Path> path(Matcher<? super BoardPosition>... positions) {
         var baseMatcher = org.hamcrest.Matchers.contains(positions);
         return new TypeSafeMatcher<>() {
             @Override

@@ -1,10 +1,18 @@
 package com.onikiychuk.xmexersize;
 
-public class KnightFigure {
-    public BoardPosition[] availableMoves(BoardPosition position) {
-        return new BoardPosition[]{
-                new BoardPosition("b", 3),
-                new BoardPosition("c", 2)
-        };
+import java.util.stream.Stream;
+
+class KnightFigure {
+    BoardPosition[] availableMoves(BoardPosition position) {
+        return Stream.of(
+                position.moveLeft(2).moveUp(1),
+                position.moveLeft(2).moveDown(1),
+                position.moveRight(2).moveUp(1),
+                position.moveRight(2).moveDown(1),
+                position.moveUp(2).moveLeft(1),
+                position.moveUp(2).moveRight(1),
+                position.moveDown(2).moveLeft(1),
+                position.moveDown(2).moveRight(1)).
+                filter(BoardPosition::isValid).toArray(BoardPosition[]::new);
     }
 }
