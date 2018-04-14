@@ -13,6 +13,7 @@ class KnightFigure {
                 position.moveUp(2).moveRight(1),
                 position.moveDown(2).moveLeft(1),
                 position.moveDown(2).moveRight(1)).
-                filter(BoardPosition::isValid).toArray(BoardPosition[]::new);
+                filter(BoardPosition::isValid).
+                toArray(BoardPosition[]::new);
     }
 }

@@ -1,15 +1,43 @@
 package com.onikiychuk.xmexersize;
 
-public class PathFinder {
-    private final KnightFigure figure;
-    private final int maxNumberOfMoves;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
 
-    public PathFinder(KnightFigure figure, int maxNumberOfMoves) {
+import static java.util.Comparator.comparingInt;
+
+class PathFinder {
+    private final KnightFigure figure;
+    private final int maxPathLength;
+
+    PathFinder(KnightFigure figure, int maxNumberOfMoves) {
         this.figure = figure;
-        this.maxNumberOfMoves = maxNumberOfMoves;
+        maxPathLength = maxNumberOfMoves + 1; //we add 1 because initial position are also inside path
     }
 
-    public Path[] find(BoardPosition startPosition, BoardPosition endPosition) {
-        return new Path[]{new Path(new BoardPosition("a", 1)).addPosition(new BoardPosition("b", 3)).addPosition(new BoardPosition("c", 5))};
+    Path[] find(BoardPosition startPosition, BoardPosition endPosition) {
+
+        var queue = new ArrayDeque<Path>();
+        queue.add(new Path(startPosition));
+        var result = new ArrayList<Path>();
+        while (!queue.isEmpty()) {
+            var path = queue.removeFirst();
+            if (path.length() > maxPathLength) {
+                break;
+            }
+            if (path.last().equals(endPosition)) {
+                result.add(path);
+            } else {
+                var moves = figure.availableMoves(path.last());
+                for (var move : moves) {
+                    queue.addLast(path.addPosition(move));
+                }
+            }
+        }
+
+        return result.stream().
+                filter(p -> p.last().equals(endPosition)).
+                sorted(comparingInt(Path::length)).
+                toArray(Path[]::new);
+
     }
 }

@@ -5,7 +5,7 @@ import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 
 class Matchers {
-    static Matcher<? super BoardPosition> position(String column, int row) {
+    static Matcher<? super BoardPosition> position(String column, String row) {
         return new TypeSafeMatcher<>() {
 
 
@@ -16,12 +16,12 @@ class Matchers {
 
             @Override
             protected boolean matchesSafely(BoardPosition position) {
-                return position.isValid() && position.row() == row && position.column().equals(column);
+                return position.isValid() && position.row().equals(row) && position.column().equals(column);
             }
 
             @Override
             public void describeTo(Description description) {
-                description.appendText("position should be ").appendText(String.format("%s%d", column, row));
+                description.appendText(String.format("%s%d", column, row));
             }
         };
     }

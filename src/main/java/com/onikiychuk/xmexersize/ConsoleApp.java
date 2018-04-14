@@ -1,22 +1,14 @@
 package com.onikiychuk.xmexersize;
 
-import java.util.stream.StreamSupport;
-
 import static java.util.Arrays.stream;
 import static java.util.stream.Collectors.joining;
 
 public class ConsoleApp {
 
     private static BoardPosition parse(String value) {
-        if (value.length() != 2) {
-            return new BoardPosition("0", 0);
-        }
-        try {
-            var row = Integer.parseInt(value.substring(1));
-            return new BoardPosition(value.substring(0, 1), row);
-        } catch (NumberFormatException ex) {
-            return new BoardPosition("0", 0);
-        }
+        BoardPositionEditor editor = new BoardPositionEditor();
+        editor.setAsText(value);
+        return (BoardPosition) editor.getValue();
     }
 
     public static void main(String[] args) {
@@ -32,9 +24,9 @@ public class ConsoleApp {
         var paths = new PathFinder(figure, 3).find(start, end);
 
         var stringPaths = stream(paths).
-                map(p -> StreamSupport.stream(p.spliterator(), false).map(BoardPosition::toString).collect(joining(" "))).
+                map(Path::toString).
                 collect(joining("\n"));
         System.out.print(stringPaths);
-
+        System.out.println();
     }
 }
