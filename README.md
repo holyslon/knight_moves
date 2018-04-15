@@ -2,12 +2,22 @@
 
 This is test exercise for XM.
 
+This exercise is done with Java 10. If you dont have it on your machine - just use docker way.
+
 #Run
 
-- You can run app via `mvn compile exec:java -Dexec.args="a1 b3"`
-- You can run tests via `mvn test`
-- You can run build fat-jar with Spring Boot app via mvn `mvn package` and run it `java -jar target/xmexersize-0.0.1-SNAPSHOT.jar`
-- You can build Docker image via `make build` and run app in Docker container via `make run` (Docker can be downloaded [here](https://www.docker.com/community-edition#/download))
+- Docker way:
+    - Run all just using `make`
+    - Build backend docker image with `make build_backend`
+    - Build ui docker image with `make build_ui`
+    - Run backend interactive with `make run_backend`
+    - Run ui interactive with `make run_ui`
+    - Run both backend and ui in detached mode `make run_all`
+    - Stop detached containers with `make stop`
+- Local machine way (you should have jdk 10 and maven 3 installed for that):
+    - You can run app via `mvn compile exec:java -Dexec.args="a1 b3"`
+    - You can run tests via `mvn test`
+    - You can run build fat-jar with Spring Boot app via mvn `mvn package` and run it `java -jar target/xmexersize-0.0.1-SNAPSHOT.jar`
 
 #Future development
 
