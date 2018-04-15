@@ -19,6 +19,8 @@ public class AppController {
         binder.registerCustomEditor(BoardPosition.class, new BoardPositionEditor());
     }
 
+
+    @CrossOrigin(origins = "*")
     @RequestMapping(value = "/path/knight", method = RequestMethod.GET, produces = "application/json")
     @ResponseBody
     Path[] knightPath(
