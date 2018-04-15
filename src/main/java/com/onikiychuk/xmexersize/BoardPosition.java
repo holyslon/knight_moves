@@ -1,5 +1,7 @@
 package com.onikiychuk.xmexersize;
 
+import com.fasterxml.jackson.annotation.JsonValue;
+
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -47,6 +49,7 @@ public class BoardPosition {
         return ROWS[row];
     }
 
+    @JsonValue
     @Override
     public String toString() {
         if (isValid()) {
