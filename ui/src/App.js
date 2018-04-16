@@ -16,7 +16,7 @@ class App extends Component {
     constructor(props) {
         super(props)
 
-        this.state = {pieces: defaultLineup, callToServer:false, moves: null}
+        this.state = {pieces: defaultLineup, callToServer: false, moves: null}
         this.handleMovePiece = this.handleMovePiece.bind(this)
         this.renderMoves = this.renderMoves.bind(this)
         this.handleDragStart = this.handleDragStart.bind(this)
@@ -28,9 +28,9 @@ class App extends Component {
 
     }
 
-    fetchMoves(){
+    fetchMoves() {
         const {pieces} = this.state
-        if (pieces.length !=2) {
+        if (pieces.length != 2) {
             console.debug("Incorrect state", pieces)
             return
         }
@@ -44,11 +44,10 @@ class App extends Component {
             end = pieces[0].substr(2)
         }
 
-        this.setState({callToServer:true})
+        this.setState({callToServer: true})
         const outerThis = this
 
-        fetch("http://localhost:8080/path/knight?start="+start+"&end="+end).
-            then(function (response) {
+        fetch("http://localhost:8080/path/knight?start=" + start + "&end=" + end).then(function (response) {
             if (response.status >= 200 && response.status < 300) {
                 return Promise.resolve(response)
             } else {
@@ -61,10 +60,10 @@ class App extends Component {
             if (Array.isArray(json)) {
                 moves = json[0]
             }
-            outerThis.setState({callToServer:false, moves:moves})
+            outerThis.setState({callToServer: false, moves: moves})
         }).catch(function (error) {
             console.log('Request failed', error);
-            outerThis.setState({callToServer:false})
+            outerThis.setState({callToServer: false})
         })
     }
 
@@ -84,8 +83,8 @@ class App extends Component {
     }
 
 
-    renderMoves(){
-        if(this.state.moves != null){
+    renderMoves() {
+        if (this.state.moves != null) {
             const {moves} = this.state
             return <div className="Moves">
                 Fastest path are: {moves.join(" ")}
