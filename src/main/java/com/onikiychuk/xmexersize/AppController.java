@@ -6,11 +6,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
+
+/***
+ * Entry point class if we want to run app as web-service
+ */
 @Controller
 @EnableAutoConfiguration
 public class AppController {
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         SpringApplication.run(AppController.class, args);
     }
 

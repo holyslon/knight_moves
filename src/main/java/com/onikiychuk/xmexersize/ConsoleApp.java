@@ -3,6 +3,9 @@ package com.onikiychuk.xmexersize;
 import static java.util.Arrays.stream;
 import static java.util.stream.Collectors.joining;
 
+/**
+ * Entry point class for console version of app.
+ */
 public class ConsoleApp {
 
     private static BoardPosition parse(String value) {

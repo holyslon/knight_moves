@@ -2,6 +2,9 @@ package com.onikiychuk.xmexersize;
 
 import java.beans.PropertyEditorSupport;
 
+/**
+ * {@link java.beans.PropertyEditor} support for {@link com.onikiychuk.xmexersize.BoardPosition}
+ */
 public class BoardPositionEditor extends PropertyEditorSupport {
 
     @Override
@@ -11,10 +14,10 @@ public class BoardPositionEditor extends PropertyEditorSupport {
         }
         var column = text.substring(0, 1);
         var row = text.substring(1, 2);
-        if (!BoardPosition.ValidColumn(column)) {
+        if (!BoardPosition.validColumn(column)) {
             throw new IllegalArgumentException(String.format("String '%s' invalid column. Column should be letters from a to h", column));
         }
-        if (!BoardPosition.ValidRow(row)) {
+        if (!BoardPosition.validRow(row)) {
             throw new IllegalArgumentException(String.format("String '%s' invalid row. Column should be numbers from 1 to 8", row));
         }
         super.setValue(new BoardPosition(column, row));
