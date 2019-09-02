@@ -1,7 +1,5 @@
 # Knight moves
 
-This is test exercise for XM.
-
 This exercise is done with Java 10. If you dont have it on your machine - just use docker way.
 
 #Run
