@@ -1,4 +1,4 @@
-# xmexersize
+# Knight moves
 
 This is test exercise for XM.
 
